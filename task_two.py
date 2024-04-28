@@ -10,7 +10,7 @@ def generator_numbers(text: str) -> Generator[float, None, None]:
             string that contains numbers to parse and sum up.
     
     Returns:
-        Generator that yields flaot numbers.
+        Generator that yields float number.
     """
     numbers = [float(chunk) for chunk in text.split() if chunk.replace(".", "").isnumeric()]
     for number in numbers:
