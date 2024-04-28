@@ -1,7 +1,6 @@
 """Sum profit calculator from text"""
 
 from typing import Callable, Generator
-import re
 
 def generator_numbers(text: str) -> Generator[float, None, None]:
     """Returns generator.
