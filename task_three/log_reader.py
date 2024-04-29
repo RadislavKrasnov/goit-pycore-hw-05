@@ -4,8 +4,11 @@ import re
 
 def load_logs(file_path: str) -> list:
     logs = []
-    with open(file_path, 'r') as file:
-        logs = [parse_log_line(line.strip()) for line in file]
+    try:
+        with open(file_path, 'r') as file:
+            logs = [parse_log_line(line.strip()) for line in file if line.strip()]
+    except FileNotFoundError:
+        print(f'File {file_path} not found!')
     return logs
 
 def parse_log_line(line: str) -> dict:
@@ -14,10 +17,13 @@ def parse_log_line(line: str) -> dict:
         re.I
     )
     match = re.match(pattern, line)
-    line = {
-        "date": match['date'],
-        "time": match['time'],
-        "level": match['level'],
-        "message": match['message']
-    }
+    line = dict()
+    
+    if match:
+        line = {
+            "date": match.group('date'),
+            "time": match.group('time'),
+            "level": match.group('level'),
+            "message": match.group('message')
+        }
     return line
