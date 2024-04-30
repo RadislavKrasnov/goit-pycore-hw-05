@@ -20,7 +20,7 @@ def load_logs(file_path: str) -> list:
     """
     logs = []
     try:
-        with open(file_path, 'r') as file:
+        with open(file_path, 'r', encoding='utf-8') as file:
             logs = [parse_log_line(line.strip()) for line in file if line.strip()]
     except FileNotFoundError:
         print(f'File {file_path} not found!')
