@@ -3,6 +3,21 @@
 import re
 
 def load_logs(file_path: str) -> list:
+    """Loads logs.
+
+    Args:
+        file_path:
+            String with the path to log file to read.
+
+    Returns:
+        List of dictionaries with logs from file 
+        ex. {
+                "date": "2024-01-22",
+                "time": "08:30:01",
+                "level": "INFO",
+                "message": "User logged in successfully."
+            }
+    """
     logs = []
     try:
         with open(file_path, 'r') as file:
@@ -12,6 +27,15 @@ def load_logs(file_path: str) -> list:
     return logs
 
 def parse_log_line(line: str) -> dict:
+    """Parses log line.
+
+    Args:
+        line:
+            String that is line of log from file.
+    
+    Returns:
+        Dictionary with log's line parsed data: date, time, level, message.
+    """
     pattern = re.compile(
         r'(?P<date>\d{4}-\d{2}-\d{2})\s(?P<time>\d{2}:\d{2}:\d{2})\s(?P<level>\w+)\s(?P<message>.+)', 
         re.I
